@@ -1,8 +1,7 @@
 <template>
   <div>
-    <input
+    <textarea
       class="form-control"
-      :type="type"
       v-model="value"
       v-on:change="emitChange"
       v-on:blur="emitBlur"
@@ -14,12 +13,8 @@
 </template>
 <script>
 export default {
-  name: 'Textfield',
+  name: 'Textarea',
   props: {
-    type: {
-      type: String,
-      default: 'text'
-    },
     placeholder: {
       type: String,
       default: ''

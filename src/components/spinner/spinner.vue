@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="className">
+  <div>
     <div class="spinner" :style="spinnerStyle"></div>
     <div class="spinner-text" :style="textStyle" v-if="message.length > 0">{{message}}</div>
   </div>
@@ -8,7 +8,7 @@
 <script>
 const isNumber = (n) => !isNaN(parseFloat(n)) && isFinite(n)
 export default {
-  name: 'spinner',
+  name: 'Spinner',
   props: {
     size: {
       // either a number (pixel width/height) or 'tiny', 'small',

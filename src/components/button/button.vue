@@ -1,18 +1,17 @@
 <template>
-  <button class="btn" v-bind:class="className" v-bind:disabled="disabled || isLoading" onclick="onClick">
-    <span v-if={text}>{text}</span>
-    <spinner size="small" v-if={isLoading} />
+  <button :class="classObject" :disabled="disabled || isLoading" v-on:click="onClick">
+    {{text}}
+    <Spinner size="small" v-if={isLoading} />
   </button>
 </template>
 
 <script>
+import Spinner from '@/components/spinner/spinner.vue';
+
 export default {
-  name: 'vue-button',
+  name: 'Button',
+  components: [Spinner],
   props: {
-    className: {
-      type: String,
-      default: ''
-    },
     kind: {
       // primary, secondary, danger, default, etc
       type: String,
@@ -29,10 +28,18 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    },
-    onClick: {
-      type: Function,
-      default: () => {}
+    }
+  },
+  computed: {
+    buttonKind: () => `btn-${this.kind}`,
+    classObject: () => ['btn', this.buttonKind]
+  },
+  methods: {
+    onClick (e) {
+      if (this.disabled && e instanceof Event) {
+        e.stopPropagation()
+        e.preventDefault()
+      } else this.$emit('clicked')
     }
   }
 }
